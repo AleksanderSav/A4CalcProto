@@ -201,6 +201,7 @@ export default class MaterialStore {
         imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/banner1.jpg",
       },
     ];
+    this._selectedCategory = {};
     this._selectedMaterial = {};
     this._selectedVinyl = {};
     this._selectedSpecVinyl = {};
@@ -213,6 +214,13 @@ export default class MaterialStore {
   }
   get category() {
     return this._category;
+  }
+  setSelectedCategory(category) {
+    this._selectedCategory = category;
+  }
+
+  get selectedCategory() {
+    return this._selectedCategory;
   }
 
   setList(material) {
