@@ -1,9 +1,54 @@
-import { INT_PRINT_CALC } from "../routeConst/routeConst";
+import {
+  INT_PRINT,
+  INT_PRINT_CALC,
+  INT_PRINT_CUT,
+} from "../routeConst/routeConst";
 
 import { makeAutoObservable } from "mobx";
 
 export default class MaterialStore {
   constructor() {
+    this._category = [
+      {
+        name: "Интерьерная печать",
+        path: INT_PRINT_CALC,
+        text: "Рабочая ветка",
+        imgLink:
+          "https://a4-yug.ru/wp-content/uploads/2020/10/maxresdefault-e1603785569284.jpg",
+      },
+      {
+        name: "Печать и контурная резка",
+        path: INT_PRINT_CUT,
+        text: "Тестовый текст",
+        imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
+      },
+      {
+        name: "Цифровая печать",
+        path: INT_PRINT,
+        text: "В разработке",
+        imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/flaery.jpg",
+      },
+      {
+        name: "Плоттерная резка",
+        path: INT_PRINT,
+        text: "В разработке",
+        imgLink:
+          "https://a4-yug.ru/wp-content/uploads/2020/10/plotternaya_rezka4.jpg",
+      },
+      {
+        name: "Стенды и таблички",
+        path: INT_PRINT,
+        text: "В разработке",
+        imgLink:
+          "https://a4-yug.ru/wp-content/uploads/2020/10/ugolok-potrebitelya.jpg",
+      },
+      {
+        name: "Ролл ап стенды",
+        path: INT_PRINT,
+        text: "В разработке",
+        imgLink: "https://a4-yug.ru/wp-content/uploads/2020/09/menu7.png",
+      },
+    ];
     this._list = [
       {
         id: 1,
@@ -162,6 +207,12 @@ export default class MaterialStore {
     this._selectedMaterialType = [];
     this._selectedIntPrintMaterial = {}; // подсветка кнопки и заголовок селектора
     makeAutoObservable(this);
+  }
+  setCategory(category) {
+    this._category = category;
+  }
+  get category() {
+    return this._category;
   }
 
   setList(material) {
