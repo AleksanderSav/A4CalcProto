@@ -36,11 +36,20 @@ const CalcBlock = observer(() => {
           </div>
         </Card.Header>
         <Card.Body>
-          <Card.Title>
-            <div className="d-flex justify-content-center align-items-center gap-3">
-              Категория заказа: <CategoryDropdown />
-              Категория материала: <TypeDropdown />
-              Используемый материал: <MaterialDropdown />
+          <Card.Subtitle>
+            <div className="d-flex justify-content-center align-items-center gap-5 mt-2">
+              <div>
+                <div className="mb-2">Категория заказа:</div>
+                <CategoryDropdown />
+              </div>
+              <div>
+                <div className="mb-2">Категория материала:</div>
+                <TypeDropdown />
+              </div>
+              <div>
+                <div className="mb-2">Используемый материал: </div>
+                <MaterialDropdown />
+              </div>
             </div>
 
             {/* <Button
@@ -51,7 +60,7 @@ const CalcBlock = observer(() => {
             >
               {materialList.selectedVinyl.name || "Выберите материал"}
             </Button> */}
-          </Card.Title>
+          </Card.Subtitle>
           <Card.Title style={{ marginTop: 30 }}>Введите размеры:</Card.Title>
           <CalcInputBlock />
         </Card.Body>
