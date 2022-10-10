@@ -8,6 +8,7 @@ import { Context } from "../../index";
 import s from "./CalckBlock.module.css";
 import { observer } from "mobx-react-lite";
 import MaterialDropdown from "../MaterialDropdown/MaterialDropdown";
+import TypeDropdown from "../TypeDropdown/TypeDropdown";
 
 const CalcBlock = observer(() => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const CalcBlock = observer(() => {
         <Card.Body>
           <Card.Title>
             <div className="d-flex justify-content-center align-items-center gap-3">
+              Категория материала: <TypeDropdown />
               Используемый материал: <MaterialDropdown />
             </div>
 
