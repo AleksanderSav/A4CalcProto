@@ -10,43 +10,46 @@ export default class MaterialStore {
   constructor() {
     this._category = [
       {
+        id: 1,
         name: "Интерьерная печать",
         path: INT_PRINT_CALC,
-        text: "Рабочая ветка",
-        imgLink:
-          "https://a4-yug.ru/wp-content/uploads/2020/10/maxresdefault-e1603785569284.jpg",
+        desc: "Рабочая ветка",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/maxresdefault-e1603785569284.jpg",
       },
       {
-        name: "Печать и контурная резка",
+        id: 2,
+        name: "Печать и резка",
         path: INT_PRINT_CUT,
-        text: "Тестовый текст",
-        imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
+        desc: "Тестовый текст",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/etiketki1.jpg",
       },
       {
+        id: 3,
         name: "Цифровая печать",
         path: INT_PRINT,
-        text: "В разработке",
-        imgLink: "https://a4-yug.ru/wp-content/uploads/2020/10/flaery.jpg",
+        desc: "В разработке",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/flaery.jpg",
       },
       {
+        id: 4,
         name: "Плоттерная резка",
         path: INT_PRINT,
-        text: "В разработке",
-        imgLink:
-          "https://a4-yug.ru/wp-content/uploads/2020/10/plotternaya_rezka4.jpg",
+        desc: "В разработке",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/plotternaya_rezka4.jpg",
       },
       {
+        id: 5,
         name: "Стенды и таблички",
         path: INT_PRINT,
-        text: "В разработке",
-        imgLink:
-          "https://a4-yug.ru/wp-content/uploads/2020/10/ugolok-potrebitelya.jpg",
+        desc: "В разработке",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/10/ugolok-potrebitelya.jpg",
       },
       {
+        id: 6,
         name: "Ролл ап стенды",
         path: INT_PRINT,
-        text: "В разработке",
-        imgLink: "https://a4-yug.ru/wp-content/uploads/2020/09/menu7.png",
+        desc: "В разработке",
+        img: "https://a4-yug.ru/wp-content/uploads/2020/09/menu7.png",
       },
     ];
     this._list = [
