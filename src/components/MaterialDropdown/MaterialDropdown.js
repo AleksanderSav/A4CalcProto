@@ -5,6 +5,10 @@ import { Context } from "../..";
 
 const MaterialDropdown = observer(() => {
   const { materialList } = useContext(Context);
+
+  function setMaterial(material) {
+    materialList.setSelectedMaterial(material);
+  }
   return (
     <Dropdown style={{ color: "black" }}>
       <Dropdown.Toggle
@@ -16,11 +20,8 @@ const MaterialDropdown = observer(() => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {materialList.vinyl.map((i) => (
-          <Dropdown.Item
-            key={i.id}
-            onClick={() => materialList.setSelectedVinyl(i)}
-          >
+        {materialList.selectedMaterialType.map((i) => (
+          <Dropdown.Item key={i.id} onClick={() => setMaterial(i)}>
             {i.name}
           </Dropdown.Item>
         ))}
