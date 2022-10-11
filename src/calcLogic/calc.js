@@ -9,11 +9,9 @@ function startTest(
   count,
   material,
   lamination,
-  glossy,
-  matt,
-  transparent,
-  white,
-  borderCut
+  borderCut,
+  orderCategory,
+  price
 ) {
   class OrderItem {
     constructor(
@@ -23,11 +21,9 @@ function startTest(
       count,
       material,
       lamination,
-      glossy,
-      matt,
-      transparent,
-      white,
-      borderCut
+      borderCut,
+      orderCategory,
+      price
     ) {
       this.width = width;
       this.height = height;
@@ -35,13 +31,14 @@ function startTest(
       this.count = count;
       this.material = material;
       this.lamination = lamination;
-      this.glossy = glossy;
-      this.matt = matt;
-      this.transparent = transparent;
-      this.white = white;
       this.borderCut = borderCut;
       this.random = (Math.random() * 10000).toFixed();
-      this.orderType = "Интерьерная печать";
+      this.orderCategory = orderCategory;
+      this.price = price;
+      this.totalArea = (this.width * this.height * this.count).toFixed(3);
+      this.onePcsArea = this.width * this.height;
+      this.onePcsCost = this.onePcsArea * this.price;
+      this.totalCost = this.totalArea * this.price;
     }
   }
 
@@ -52,11 +49,9 @@ function startTest(
     count,
     material,
     lamination,
-    glossy,
-    matt,
-    transparent,
-    white,
-    borderCut
+    borderCut,
+    orderCategory,
+    price
   );
 
   orderList.push(order);

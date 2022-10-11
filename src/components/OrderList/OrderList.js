@@ -1,8 +1,17 @@
-import { Card, Col, Container, Form, Row, Accordion } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Accordion,
+  Table,
+} from "react-bootstrap";
 import React, { useContext } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { Context } from "../../index";
 import { orderClear, orderList } from "../../calcLogic/calc";
+import { BiRuble } from "react-icons/bi";
 
 const OrderList = ({ orderItem }) => {
   const { order } = useContext(Context);
@@ -57,16 +66,20 @@ const OrderList = ({ orderItem }) => {
       <Accordion.Item eventKey="0">
         <Accordion.Header>
           <Card
-            className=" pb-2 pt-3 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-3"
+            className=" pb-2 pt-3 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-4"
             style={{
               minWidth: 300,
               backgroundColor: "whitesmoke",
               width: "100% ",
             }}
           >
-            <div style={{ textAlign: "center", maxWidth: 130 }}>
-              <h6>{"Описание"}</h6>
-              <p>{orderItem.description}</p>
+            <div style={{ textAlign: "center" }}>
+              <h6>{"Категория заказа"}</h6>
+              <p>{orderItem.orderCategory}</p>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <h6>{"Материал"}</h6>
+              <p>{orderItem.material}</p>
             </div>
             <div className="" style={{ textAlign: "center" }}>
               <h6>{"Размеры"}</h6>
@@ -79,80 +92,60 @@ const OrderList = ({ orderItem }) => {
               <p>{orderItem.count}</p>
             </div>
             <div style={{ textAlign: "center" }}>
-              <h6>{"Категория заказа"}</h6>
-              <p>{orderItem.orderType}</p>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              <h6>{"Материал"}</h6>
-              <p>{orderItem.material}</p>
-            </div>
-            <div style={{ textAlign: "center" }}>
               <h6>{"Удалить"}</h6>
-              <AiFillDelete onClick={() => removeItem(orderItem.random)} />
+              <AiFillDelete
+                style={{ fontSize: 22 }}
+                onClick={() => removeItem(orderItem.random)}
+              />
             </div>
           </Card>
         </Accordion.Header>
         <Accordion.Body>
-          <Card
-            //className=" pb-2 pt-3 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-3"
-            className="   ms-4 me-5 shadow-sm"
-            style={{
-              minWidth: 300,
-              backgroundColor: "whitesmoke",
-              width: "inherit",
-            }}
-          >
-            <div
-              className=" pb-2 pt-3 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-3"
-              style={{
-                minWidth: 300,
-                backgroundColor: "whitesmoke",
-                width: "inherit",
-              }}
-            >
-              <div style={{ textAlign: "center" }}>
-                <h6>{"Обрезка в формат"}</h6>
-                <p>{orderItem.borderCut ? "Да" : "Нет"}</p>
-              </div>
-              <div style={{ textAlign: "center", maxWidth: 130 }}>
-                <h6>{"Фактура пленки"}</h6>
-                <p>{orderItem.glossy ? "Глянец" : "Мат"}</p>
-              </div>
-              <div style={{ textAlign: "center", maxWidth: 130 }}>
-                <h6>{"Тип пленки"}</h6>
-                <p>{orderItem.white ? "Белая" : "Прозрачная"}</p>
-              </div>
-              <div style={{ textAlign: "center", maxWidth: 130 }}>
-                <h6>{"Ламинация"}</h6>
-                <p>{orderItem.lamination ? "Да" : "Нет"}</p>
-              </div>
-            </div>
-            <div
-              className=" pb-2 pt-3 d-flex flex-row justify-content-center ms-5 me-5 shadow-sm gap-3"
-              style={{
-                minWidth: 300,
-                backgroundColor: "whitesmoke",
-                width: "inherit",
-              }}
-            >
-              <div style={{ textAlign: "center" }}>
-                <h6>{"Площадь единицы"}</h6>
-                <p></p>
-              </div>
-              <div style={{ textAlign: "center", maxWidth: 130 }}>
-                <h6>{"Общая площадь"}</h6>
-                <p></p>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <h6>{"Стоимость единицы"}</h6>
-                <p></p>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <h6>{"Общая стоимость"}</h6>
-                <p></p>
-              </div>
-            </div>
-          </Card>
+          <Table striped bordered hover size="sm" className="mt-4">
+            <thead>
+              <tr>
+                <th colSpan={4}>
+                  Размеры изделия: {orderItem.width}x{orderItem.height} м.
+                  Количество: {orderItem.count} шт. <br /> Материал:{" "}
+                  {orderItem.material}
+                </th>
+              </tr>
+              <tr>
+                <th>Общая площадь:</th>
+                <th>Площадь одной штуки:</th>
+                <th>Стоимость одной штуки:</th>
+                <th>Общая стоимость:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{orderItem.totalArea}</td>
+                <td>{orderItem.onePcsArea}</td>
+                <td>
+                  {orderItem.onePcsCost} <BiRuble />
+                </td>
+                <td>
+                  {orderItem.totalCost} <BiRuble />
+                </td>
+              </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th colSpan={2}>Описание заказа</th>
+
+                <th>Ламинация:</th>
+                <th>Подрезка:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colSpan={2}></td>
+
+                <td>{orderItem.lamination ? "Да" : "Нет"} </td>
+                <td>{orderItem.borderCut ? "Да" : "Нет"} </td>
+              </tr>
+            </tbody>
+          </Table>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

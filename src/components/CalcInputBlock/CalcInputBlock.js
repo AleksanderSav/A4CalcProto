@@ -27,6 +27,7 @@ const CalcInputBlock = observer(() => {
   const { materialList } = useContext(Context);
   const { order } = useContext(Context);
   const { checkStore } = useContext(Context);
+
   function start() {
     let result = startTest(
       width,
@@ -35,11 +36,9 @@ const CalcInputBlock = observer(() => {
       count,
       materialList.selectedMaterial.name,
       checkStore.lamination,
-      checkStore.glossy,
-      checkStore.matt,
-      checkStore.transparent,
-      checkStore.white,
-      checkStore.borderCut
+      checkStore.borderCut,
+      materialList.selectedCategory.name,
+      price.currentPrice
     );
     order.setOrder(result);
   }
@@ -48,8 +47,8 @@ const CalcInputBlock = observer(() => {
   useEffect(() => {
     let area = (width * height).toFixed(3);
     let areaT = (area * count).toFixed(2);
-    let oneCount = area * price.priceList.vinyl;
-    let totalCount = areaT * price.priceList.vinyl;
+    let oneCount = area * price.currentPrice;
+    let totalCount = areaT * price.currentPrice;
     let minOrder = 500 / oneCount;
     if (minOrder === Infinity) {
       minOrder = "";
@@ -58,7 +57,6 @@ const CalcInputBlock = observer(() => {
     if (countPerMeter === Infinity) {
       countPerMeter = "";
     }
-    console.log(minOrder);
     setPreFlight({
       area: area,
       areaTotal: areaT,
@@ -67,7 +65,19 @@ const CalcInputBlock = observer(() => {
       minOrder: minOrder,
       countPerMeter: countPerMeter,
     });
-  }, [width, height, count]);
+  }, [width, height, count, price.currentPrice]);
+
+  useEffect(() => {
+    // Подтягивание стоимость в зависимости от выбраной категории
+    if (materialList.selectedCategory.name === "Интерьерная печать") {
+      price.setCurrentPrice(price.priceList.vinyl);
+      console.log(`intPrint ${price.priceList.vinyl}`);
+    }
+    if (materialList.selectedCategory.name === "Печать и резка") {
+      price.setCurrentPrice(price.priceList.printCut);
+      console.log(`printCut ${price.priceList.printCut}`);
+    }
+  }, [materialList.selectedCategory, width, height, count]);
   return (
     <div className=" ">
       <Form className="mt-4 m-auto">
@@ -135,11 +145,11 @@ const CalcInputBlock = observer(() => {
               onChange={(event) => setCount(Number(event.target.value))}
             />
           </Col>
-          <Col md={2}>
-            <Button variant="warning" onClick={start}>
-              Добавить в заказ
-            </Button>
-          </Col>
+          {/*<Col md={2}>*/}
+          {/*  <Button variant="warning" onClick={start}>*/}
+          {/*    Добавить в заказ*/}
+          {/*  </Button>*/}
+          {/*</Col>*/}
         </Row>
       </Form>
 
@@ -197,7 +207,7 @@ const CalcInputBlock = observer(() => {
         {/*</div>*/}
       </div>
 
-      <Row className="d-flex justify-content-center mt-5">
+      <Row className="d-flex justify-content-center mt-4 gap-5">
         <Col md={3}>
           <h6 className="m-auto" style={{ textAlign: "center" }}>
             {"Описание заказа"}
@@ -216,6 +226,14 @@ const CalcInputBlock = observer(() => {
           <Form.Control className="mt-2" placeholder="" type="file" />
         </Col>
       </Row>
+      <div className="mt-4 gap-3 d-flex justify-content-center mb-3">
+        <Button variant="success" style={{ width: 150, height: 62 }}>
+          Сброс значний
+        </Button>
+        <Button variant="warning" onClick={start} style={{ width: 150 }}>
+          Добавить в заказ
+        </Button>
+      </div>
     </div>
   );
 });
