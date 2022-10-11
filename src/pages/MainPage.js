@@ -7,6 +7,8 @@ import SideBar from "../components/SideBar/SideBar";
 import TopBreadCrumbs from "../components/TopBreadCrumbs/TopBreadCrumbs";
 import CategoryBlock from "../components/CategoryCard/CategoryBlock";
 
+import OrderTotal from "../components/OrderTotal/OrderTotal";
+
 const MainPage = () => {
   const { order } = useState();
   console.log(order);
@@ -20,6 +22,7 @@ const MainPage = () => {
           <TopStepper />
           <TopBreadCrumbs />
           <CategoryBlock />
+          <OrderTotal />
         </Col>
       </Row>
 

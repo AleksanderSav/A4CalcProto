@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import OrderList from "../OrderList/OrderList";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
+import OrderTotal from "../OrderTotal/OrderTotal";
 
 const OrderListBlock = observer(() => {
   const { order } = useContext(Context);
