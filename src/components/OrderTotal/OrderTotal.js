@@ -4,15 +4,15 @@ import { observer } from "mobx-react-lite";
 
 const OrderTotal = observer(() => {
   const { order } = useContext(Context);
-  const [total, setTotal] = useState("0");
+  const [totalCost, setTotalCost] = useState("0");
   useEffect(() => {
-    setTotal(
+    setTotalCost(
       order.order.reduce(function (sum, order) {
         return sum + order.totalCost;
       }, 0)
     );
   }, [order.order]);
-  return <div>Итого в заказе:{total} рублей</div>;
+  return <div>Итого в заказе:{totalCost} рублей</div>;
 });
 
 export default OrderTotal;

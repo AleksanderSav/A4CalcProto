@@ -12,6 +12,7 @@ import MaterialList from "../../components/MateriaList/MaterialList";
 import NewMaterialSelector from "../../components/NewMaterialSelector/NewMaterialSelector";
 import AdditionalBlock from "../../components/AdditionalBlock/AdditionalBlock";
 import MaterialTypeList from "../../components/MaterialTypeList/MaterialTypeList";
+import SubmitOrder from "../../components/SubmitOrder/SubmitOrder";
 
 const IntPrintCalc = () => {
   const { materialList } = useContext(Context);
@@ -37,6 +38,7 @@ const IntPrintCalc = () => {
           <AdditionalBlock />
           <CalcBlock />
           <OrderListBlock />
+          <SubmitOrder />
         </Col>
       </Row>
 

@@ -4,6 +4,7 @@ import OrderList from "../OrderList/OrderList";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 import OrderTotal from "../OrderTotal/OrderTotal";
+import SubmitOrder from "../SubmitOrder/SubmitOrder";
 
 const OrderListBlock = observer(() => {
   const { order } = useContext(Context);
@@ -16,7 +17,6 @@ const OrderListBlock = observer(() => {
       {order.order.map((order) => (
         <OrderList key={order.random} orderItem={order} />
       ))}
-      <OrderTotal />
     </Card>
   );
 });
