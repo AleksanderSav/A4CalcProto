@@ -16,6 +16,7 @@ const OrderListBlock = observer(() => {
       {order.order.map((order) => (
         <OrderList key={order.random} orderItem={order} />
       ))}
+      <OrderTotal />
     </Card>
   );
 });

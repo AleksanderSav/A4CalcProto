@@ -22,7 +22,6 @@ const MainPage = () => {
           <TopStepper />
           <TopBreadCrumbs />
           <CategoryBlock />
-          <OrderTotal />
         </Col>
       </Row>
 

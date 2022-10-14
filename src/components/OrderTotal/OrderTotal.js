@@ -1,18 +1,18 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 
 const OrderTotal = observer(() => {
   const { order } = useContext(Context);
-  let totalPrice;
+  const [total, setTotal] = useState("0");
   useEffect(() => {
-    totalPrice = order.order.reduce(function (sum, order) {
-      return sum + order.totalCost;
-    }, 0);
-    console.log("work");
-    console.log(totalPrice);
+    setTotal(
+      order.order.reduce(function (sum, order) {
+        return sum + order.totalCost;
+      }, 0)
+    );
   }, [order.order]);
-  return <div>`${totalPrice}`</div>;
+  return <div>Итого в заказе:{total} рублей</div>;
 });
 
 export default OrderTotal;
