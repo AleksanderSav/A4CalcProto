@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Table } from "react-bootstrap";
+import { Button, Card, Table } from "react-bootstrap";
 import { Context } from "../../index";
 import { observer } from "mobx-react-lite";
 
@@ -17,7 +17,7 @@ const SubmitOrder = observer(() => {
 
   return (
     <div>
-      <Card className="mt-5">
+      <Card className="mt-5 mb-5">
         <Card.Header style={{ textAlign: "center" }}>
           <h4>Подтверждение заказа</h4>
         </Card.Header>
@@ -49,6 +49,14 @@ const SubmitOrder = observer(() => {
             </tbody>
           </Table>
         </div>
+
+        <Button
+          variant="warning"
+          className="mt-3 mb-3 m-auto"
+          style={{ width: 200 }}
+        >
+          Подтвердить и отправить в работу
+        </Button>
       </Card>
     </div>
   );
