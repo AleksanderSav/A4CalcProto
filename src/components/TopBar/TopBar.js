@@ -4,7 +4,11 @@ import { NavLink } from "react-router-dom";
 import { TbCalculator } from "react-icons/tb";
 import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
-import { LOGIN_ROUTE, MAIN_ROUTE } from "../../routeConst/routeConst";
+import {
+  LOGIN_ROUTE,
+  MAIN_ROUTE,
+  TODO_ROUTE,
+} from "../../routeConst/routeConst";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 // const nav = useNavigate();
@@ -34,6 +38,15 @@ const TopBar = observer(() => {
         </NavLink>
 
         <Nav className="">
+          <NavLink to={TODO_ROUTE}>
+            <Button
+              variant={"warning"}
+              style={{ height: 41 }}
+              className={"me-2"}
+            >
+              Список задач
+            </Button>
+          </NavLink>
           <NavLink to={LOGIN_ROUTE}>
             <Button onClick={logIn} variant="warning">
               <FaUserCircle size="25px" className="me-2" />
