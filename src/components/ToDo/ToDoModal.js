@@ -8,6 +8,7 @@ const ToDoModal = ({ show, hide }) => {
   async function sendTask() {
     const randomNumber = (Math.random() * 10000).toFixed();
     const res = await postToDo(message, randomNumber);
+    setMessage("");
     hide();
   }
   return (

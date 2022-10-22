@@ -8,3 +8,8 @@ export const getToDo = async function () {
 export const postToDo = async function (message, randomNumber) {
   const res = await host.post("api/todo", { message, randomNumber });
 };
+
+export const removeToDo = async function (randomNumber) {
+  console.log(randomNumber);
+  const res = await host.delete(`api/todo/`, { data: { randomNumber } });
+};

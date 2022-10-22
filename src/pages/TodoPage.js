@@ -1,17 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import { getToDo } from "../components/axios/ToDoApi";
 import ToDoModal from "../components/ToDo/ToDoModal";
 import { Context } from "../index";
 import { observer } from "mobx-react-lite";
 import ToDoString from "../components/ToDo/ToDoString";
+import data from "bootstrap/js/src/dom/data";
+import ToDoStore from "../Store/ToDo";
 
 const TodoPage = observer(() => {
   const { toDoStore } = useContext(Context);
-  async function getTodo() {
-    const res = await getToDo();
-    toDoStore.setToDoList(res);
-  }
+
+  useEffect(() => {
+    const res = getToDo().then((data) => toDoStore.setToDoList(data));
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      const res = getToDo().then((data) => toDoStore.setToDoList(data));
+    }, 10000);
+  }, []);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -21,9 +29,6 @@ const TodoPage = observer(() => {
         <Card className={"mt-5"} style={{ textAlign: "center" }}>
           <Card.Header>
             <h4>Список задач</h4>
-            <Button variant={"warning"} onClick={getTodo}>
-              test
-            </Button>
           </Card.Header>
           <Button
             variant={"warning"}

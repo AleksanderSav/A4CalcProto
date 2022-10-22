@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { Card } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { Context } from "../../index";
+import axios from "axios";
+import { removeToDo } from "../axios/ToDoApi";
 
 const ToDoString = observer(({ task, index }) => {
+  const { toDoStore } = useContext(Context);
+
   async function completeTask(number) {
-    console.log(number);
+    toDoStore.setToDoList(
+      toDoStore.toDoList.filter((task) => task.randomNumber !== number)
+    );
+    await removeToDo(number);
   }
   return (
     <Card
