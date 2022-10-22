@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import { getToDo } from "../components/axios/ToDoApi";
 import ToDoModal from "../components/ToDo/ToDoModal";
+import { Context } from "../index";
+import { observer } from "mobx-react-lite";
+import ToDoString from "../components/ToDo/ToDoString";
 
-const TodoPage = () => {
+const TodoPage = observer(() => {
+  const { toDoStore } = useContext(Context);
   async function getTodo() {
     const res = await getToDo();
-    console.log(res);
+    toDoStore.setToDoList(res);
   }
 
   const [showModal, setShowModal] = useState(false);
+
   return (
     <div>
       <Container>
@@ -29,10 +34,15 @@ const TodoPage = () => {
             Добавить новую задачу
           </Button>
           <ToDoModal show={showModal} hide={() => setShowModal(false)} />
+          <div>
+            {toDoStore.toDoList.map((task, index) => (
+              <ToDoString key={task.randomNumber} task={task} index={index} />
+            ))}
+          </div>
         </Card>
       </Container>
     </div>
   );
-};
+});
 
 export default TodoPage;

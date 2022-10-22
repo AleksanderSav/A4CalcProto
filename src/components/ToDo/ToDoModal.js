@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Button, FormControl, Modal } from "react-bootstrap";
+import { postToDo } from "../axios/ToDoApi";
 
 const ToDoModal = ({ show, hide }) => {
   const [message, setMessage] = useState("");
 
   async function sendTask() {
-    console.log(message);
-    setMessage("");
+    const randomNumber = (Math.random() * 10000).toFixed();
+    const res = await postToDo(message, randomNumber);
     hide();
   }
   return (
