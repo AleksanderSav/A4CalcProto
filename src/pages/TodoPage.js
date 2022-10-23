@@ -7,11 +7,14 @@ import { observer } from "mobx-react-lite";
 import ToDoString from "../components/ToDo/ToDoString";
 import data from "bootstrap/js/src/dom/data";
 import ToDoStore from "../Store/ToDo";
+import ToDoComplete from "../components/ToDo/ToDoComplete";
+import { BiAddToQueue } from "react-icons/bi";
 
 const TodoPage = observer(() => {
   const { toDoStore } = useContext(Context);
 
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const res = getToDo()
@@ -24,8 +27,6 @@ const TodoPage = observer(() => {
       const res = getToDo().then((data) => toDoStore.setToDoList(data));
     }, 60000);
   }, []);
-
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
@@ -40,6 +41,7 @@ const TodoPage = observer(() => {
             style={{ width: 300 }}
             onClick={() => setShowModal(true)}
           >
+            <BiAddToQueue style={{ fontSize: 22 }} className={"me-2"} />
             Добавить новую задачу
           </Button>
           {loading ? (
@@ -51,6 +53,7 @@ const TodoPage = observer(() => {
           )}
 
           <ToDoModal show={showModal} hide={() => setShowModal(false)} />
+
           <div>
             {toDoStore.toDoList.map((task, index) => (
               <ToDoString key={task.randomNumber} task={task} index={index} />

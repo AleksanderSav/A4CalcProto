@@ -30,6 +30,8 @@ const ToDoModal = ({ show, hide }) => {
           <FormControl
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            placeholder={"Введите описание задачи"}
+            style={{ height: 70 }}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -53,10 +55,10 @@ const ToDoModal = ({ show, hide }) => {
             ""
           )}
           <Button variant="secondary" onClick={hide}>
-            Close
+            Отмена
           </Button>
-          <Button variant="primary" onClick={sendTask}>
-            Save Changes
+          <Button variant="warning" onClick={sendTask}>
+            Сохранить задачу
           </Button>
         </Modal.Footer>
       </Modal>

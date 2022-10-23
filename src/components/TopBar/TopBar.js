@@ -13,6 +13,7 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 // const nav = useNavigate();
 import s from "./TopBar.css";
+import { AiOutlineUnorderedList } from "react-icons/ai";
 
 const TopBar = observer(() => {
   const { user } = useContext(Context);
@@ -44,6 +45,10 @@ const TopBar = observer(() => {
               style={{ height: 41 }}
               className={"me-2"}
             >
+              <AiOutlineUnorderedList
+                style={{ fontSize: 22 }}
+                className="me-2"
+              />
               Список задач
             </Button>
           </NavLink>
