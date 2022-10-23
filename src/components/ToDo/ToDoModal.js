@@ -1,13 +1,22 @@
-import React, { useState } from "react";
-import { Button, FormControl, Modal } from "react-bootstrap";
-import { postToDo } from "../axios/ToDoApi";
+import React, { useContext, useState } from "react";
+import { Button, FormControl, Modal, Spinner } from "react-bootstrap";
+import { getToDo, postToDo } from "../axios/ToDoApi";
+import { Context } from "../../index";
 
 const ToDoModal = ({ show, hide }) => {
   const [message, setMessage] = useState("");
+  const { toDoStore } = useContext(Context);
+  const [loading, setLoading] = useState(false);
+  const [loadingRed, setLoadingRed] = useState(false);
 
   async function sendTask() {
+    setLoading(true);
     const randomNumber = (Math.random() * 10000).toFixed();
-    const res = await postToDo(message, randomNumber);
+    await postToDo(message, randomNumber).finally(() => setLoading(false));
+    setLoadingRed(true);
+    await getToDo()
+      .then((data) => toDoStore.setToDoList(data))
+      .finally(() => setLoadingRed(false));
     setMessage("");
     hide();
   }
@@ -24,6 +33,25 @@ const ToDoModal = ({ show, hide }) => {
           />
         </Modal.Body>
         <Modal.Footer>
+          {loading ? (
+            <Spinner animation="border" role="status" className={"m-auto"}>
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            ""
+          )}
+          {loadingRed ? (
+            <Spinner
+              animation="border"
+              role="status"
+              className={"m-auto"}
+              variant={"danger"}
+            >
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            ""
+          )}
           <Button variant="secondary" onClick={hide}>
             Close
           </Button>

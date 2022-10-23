@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Container } from "react-bootstrap";
+import { Button, Card, Container, Spinner } from "react-bootstrap";
 import { getToDo } from "../components/axios/ToDoApi";
 import ToDoModal from "../components/ToDo/ToDoModal";
 import { Context } from "../index";
@@ -11,14 +11,18 @@ import ToDoStore from "../Store/ToDo";
 const TodoPage = observer(() => {
   const { toDoStore } = useContext(Context);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const res = getToDo().then((data) => toDoStore.setToDoList(data));
+    const res = getToDo()
+      .then((data) => toDoStore.setToDoList(data))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
     setInterval(() => {
       const res = getToDo().then((data) => toDoStore.setToDoList(data));
-    }, 10000);
+    }, 60000);
   }, []);
 
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +42,14 @@ const TodoPage = observer(() => {
           >
             Добавить новую задачу
           </Button>
+          {loading ? (
+            <Spinner animation="border" role="status" className={"m-auto"}>
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            ""
+          )}
+
           <ToDoModal show={showModal} hide={() => setShowModal(false)} />
           <div>
             {toDoStore.toDoList.map((task, index) => (
