@@ -7,11 +7,13 @@ import axios from "axios";
 import { removeToDo } from "../axios/ToDoApi";
 import ToDoModal from "./ToDoModal";
 import ToDoComplete from "./ToDoComplete";
+import ToDoEdit from "./ToDoEdit";
 
 const ToDoString = observer(({ task, index }) => {
   const { toDoStore } = useContext(Context);
 
   const [showComplete, setShowComplete] = useState(false);
+  const [editComplete, setEditComplete] = useState(false);
 
   async function completeTask(number) {
     toDoStore.setToDoList(
@@ -19,6 +21,12 @@ const ToDoString = observer(({ task, index }) => {
     );
     await removeToDo(number);
   }
+
+  async function editTask(number, message) {
+    console.log(number);
+    console.log(message);
+  }
+
   return (
     <Card
       className={
@@ -34,13 +42,7 @@ const ToDoString = observer(({ task, index }) => {
         <h6>{"Описание задачи"}</h6>
         <p>{task.message}</p>
       </div>
-      {/*<div style={{ textAlign: "center" }}>*/}
-      {/*  <h6>{"Выполнить"}</h6>*/}
-      {/*  <AiOutlineCheckCircle*/}
-      {/*    style={{ fontSize: 30, cursor: "pointer" }}*/}
-      {/*    onClick={() => completeTask(task.randomNumber)}*/}
-      {/*  />*/}
-      {/*</div>*/}
+
       <div style={{ textAlign: "center" }}>
         <h6>{"Выполнение"}</h6>
         <Button onClick={() => setShowComplete(true)} variant={"success"}>
@@ -51,6 +53,12 @@ const ToDoString = observer(({ task, index }) => {
         show={showComplete}
         hide={() => setShowComplete(false)}
         random={task.randomNumber}
+      />
+      <Button onClick={() => setEditComplete(true)}>Test</Button>
+      <ToDoEdit
+        show={editComplete}
+        hide={() => setEditComplete(false)}
+        task={task}
       />
     </Card>
   );
