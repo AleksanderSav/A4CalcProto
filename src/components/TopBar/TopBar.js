@@ -43,7 +43,7 @@ const TopBar = observer(() => {
             <Button
               variant={"warning"}
               style={{ height: 41 }}
-              className={"me-2"}
+              className={"me-3"}
             >
               <AiOutlineUnorderedList
                 style={{ fontSize: 22 }}
