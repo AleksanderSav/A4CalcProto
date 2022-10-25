@@ -7,7 +7,6 @@ const ToDoComplete = ({ show, hide, random }) => {
   const { toDoStore } = useContext(Context);
 
   async function completeTask(number) {
-    console.log(number);
     toDoStore.setToDoList(
       toDoStore.toDoList.filter((task) => task.randomNumber !== number)
     );
