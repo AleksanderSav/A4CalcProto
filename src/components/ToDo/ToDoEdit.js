@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, FormControl, Modal, Spinner } from "react-bootstrap";
+import {
+  Button,
+  FormControl,
+  Modal,
+  Spinner,
+  ToggleButton,
+} from "react-bootstrap";
 import { getToDo, postToDo, updateToDo } from "../axios/ToDoApi";
 import { Context } from "../../index";
 
@@ -13,7 +19,7 @@ const ToDoEdit = ({ show, hide, task }) => {
 
   async function editTask(number) {
     setEdit(true);
-    await updateToDo(message, number);
+    await updateToDo(message, number, priority);
 
     await getToDo()
       .then((data) => toDoStore.setToDoList(data))
@@ -22,6 +28,7 @@ const ToDoEdit = ({ show, hide, task }) => {
   }
 
   const [message, setMessage] = useState("");
+  const [priority, setPriority] = useState(false);
 
   return (
     <div>
@@ -35,6 +42,17 @@ const ToDoEdit = ({ show, hide, task }) => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
+          <ToggleButton
+            className="mb-2 mt-3"
+            id="toggle-check"
+            type="checkbox"
+            variant="outline-danger"
+            checked={priority}
+            value="1"
+            onChange={(e) => setPriority(e.currentTarget.checked)}
+          >
+            Срочная задача
+          </ToggleButton>
         </Modal.Body>
         <Modal.Footer>
           {edit ? (

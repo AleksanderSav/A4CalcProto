@@ -18,6 +18,10 @@ export const removeToDo = async function (randomNumber) {
   const res = await host.delete(`api/todo/`, { data: { randomNumber } });
 };
 
-export const updateToDo = async function (message, randomNumber) {
-  const res = await host.put(`api/todo/`, { message, randomNumber });
+export const updateToDo = async function (message, randomNumber, highPriority) {
+  const res = await host.put(`api/todo/`, {
+    message,
+    randomNumber,
+    highPriority,
+  });
 };
