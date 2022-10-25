@@ -1,5 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Button, FormControl, Modal, Spinner } from "react-bootstrap";
+import {
+  Button,
+  FormControl,
+  Modal,
+  Spinner,
+  ToggleButton,
+} from "react-bootstrap";
 import { getToDo, postToDo } from "../axios/ToDoApi";
 import { Context } from "../../index";
 
@@ -8,11 +14,14 @@ const ToDoModal = ({ show, hide }) => {
   const { toDoStore } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [loadingRed, setLoadingRed] = useState(false);
+  const [priority, setPriority] = useState(false);
 
   async function sendTask() {
     setLoading(true);
     const randomNumber = (Math.random() * 10000).toFixed();
-    await postToDo(message, randomNumber).finally(() => setLoading(false));
+    await postToDo(message, randomNumber, priority).finally(() =>
+      setLoading(false)
+    );
     setLoadingRed(true);
     await getToDo()
       .then((data) => toDoStore.setToDoList(data))
@@ -33,6 +42,17 @@ const ToDoModal = ({ show, hide }) => {
             placeholder={"Введите описание задачи"}
             style={{ height: 70 }}
           />
+          <ToggleButton
+            className="mb-2 mt-3"
+            id="toggle-check"
+            type="checkbox"
+            variant="outline-danger"
+            checked={priority}
+            value="1"
+            onChange={(e) => setPriority(e.currentTarget.checked)}
+          >
+            Срочная задача
+          </ToggleButton>
         </Modal.Body>
         <Modal.Footer>
           {loading ? (

@@ -5,8 +5,12 @@ export const getToDo = async function () {
   return data;
 };
 
-export const postToDo = async function (message, randomNumber) {
-  const res = await host.post("api/todo", { message, randomNumber });
+export const postToDo = async function (message, randomNumber, highPriority) {
+  const res = await host.post("api/todo", {
+    message,
+    randomNumber,
+    highPriority,
+  });
 };
 
 export const removeToDo = async function (randomNumber) {

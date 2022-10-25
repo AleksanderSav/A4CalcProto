@@ -34,6 +34,7 @@ const ToDoString = observer(({ task, index }) => {
         "mt-3 mb-3 pt-3 pb-3 m-auto shadow-sm d-flex justify-content-evenly flex-row"
       }
       style={{ width: 670, backgroundColor: "whitesmoke" }}
+      bg={task.highPriority ? "danger" : ""}
     >
       <div style={{ textAlign: "center" }} className={"col-2"}>
         <h6>{"Номер"}</h6>
