@@ -2,7 +2,8 @@ const { makeAutoObservable } = require("mobx");
 
 export default class PriceStore {
   constructor() {
-    this._priceList = { vinyl: 1000, banner: 800, printCut: 1500 };
+    this._retailPrice = {};
+    this._priceList = {};
     this._currentPrice = {};
     makeAutoObservable(this);
   }
@@ -17,5 +18,12 @@ export default class PriceStore {
   }
   get currentPrice() {
     return this._currentPrice;
+  }
+
+  setRetailPrice(price) {
+    this._retailPrice = price;
+  }
+  get retailPrice() {
+    return this._retailPrice;
   }
 }

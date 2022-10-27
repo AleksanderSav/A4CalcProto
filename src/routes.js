@@ -5,6 +5,7 @@ import {
   INT_PRINT_CALC,
   INT_PRINT_CUT,
   TODO_ROUTE,
+  ADMIN_PANEL,
 } from "./routeConst/routeConst";
 
 import MainPage from "./pages/MainPage";
@@ -13,6 +14,7 @@ import IntPrint from "./pages/IntPrint";
 import IntPrintCalc from "./pages/calcs/IntPrintCalc";
 import PrintCutCalc from "./pages/calcs/PrintCutCalc";
 import TodoPage from "./pages/TodoPage";
+import AdminPanel from "./pages/AdminPanel";
 
 export const routes = [
   {
@@ -38,5 +40,9 @@ export const routes = [
   {
     path: TODO_ROUTE,
     Component: TodoPage,
+  },
+  {
+    path: ADMIN_PANEL,
+    Component: AdminPanel,
   },
 ];

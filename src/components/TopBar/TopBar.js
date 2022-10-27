@@ -5,6 +5,7 @@ import { TbCalculator } from "react-icons/tb";
 import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 import {
+  ADMIN_PANEL,
   LOGIN_ROUTE,
   MAIN_ROUTE,
   TODO_ROUTE,
@@ -13,7 +14,7 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 // const nav = useNavigate();
 import s from "./TopBar.css";
-import { AiOutlineUnorderedList } from "react-icons/ai";
+import { AiOutlineUnorderedList, AiOutlineSetting } from "react-icons/ai";
 
 const TopBar = observer(() => {
   const { user } = useContext(Context);
@@ -39,6 +40,26 @@ const TopBar = observer(() => {
         </NavLink>
 
         <Nav className="">
+          <NavLink to={ADMIN_PANEL}>
+            <Button
+              variant={"warning"}
+              style={{ height: 41 }}
+              className={"me-3"}
+            >
+              <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
+              Панель менеджера
+            </Button>
+          </NavLink>
+          <NavLink to={ADMIN_PANEL}>
+            <Button
+              variant={"warning"}
+              style={{ height: 41 }}
+              className={"me-3"}
+            >
+              <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
+              Панель администратора
+            </Button>
+          </NavLink>
           <NavLink to={TODO_ROUTE}>
             <Button
               variant={"warning"}
