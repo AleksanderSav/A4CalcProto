@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { MAIN_ROUTE } from "../routeConst/routeConst";
+import { login } from "../components/axios/UserApi";
 
 const AuthPage = () => {
   const navigate = useNavigate();
 
-  function logIn() {
-    navigate(MAIN_ROUTE);
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+
+  async function logIn() {
+    const userData = await login(loginData.email, loginData.password);
+    // navigate(MAIN_ROUTE);
   }
 
   return (
@@ -23,10 +27,21 @@ const AuthPage = () => {
           <h3 className="m-auto" style={{ textAlign: "center" }}>
             {"Авторизация"}
           </h3>
-          <Form.Control className="mt-3" placeholder="Введите email" />
+          <Form.Control
+            className="mt-3"
+            placeholder="Введите email"
+            value={loginData.email}
+            onChange={(e) =>
+              setLoginData({ ...loginData, email: e.target.value })
+            }
+          />
           <Form.Control
             className="mt-3"
             placeholder="Введите пароль"
+            value={loginData.password}
+            onChange={(e) =>
+              setLoginData({ ...loginData, password: e.target.value })
+            }
             type="password"
           />
           <Button variant={"success"} className=" mt-3 " onClick={logIn}>

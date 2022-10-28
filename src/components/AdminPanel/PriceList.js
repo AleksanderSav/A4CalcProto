@@ -8,11 +8,10 @@ import RetailPrice from "./RetailPrice";
 
 const PriceList = observer(() => {
   const { price } = useContext(Context);
-  const test2 = 1234;
 
   const [edit, setEdit] = useState({
     banner: null || price.retailPrice.banner,
-    vinyl: null,
+    vinyl: null || price.retailPrice.vinyl,
   });
 
   useEffect(() => {
