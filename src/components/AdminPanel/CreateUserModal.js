@@ -6,6 +6,14 @@ import {
     Modal,
     ToggleButton,
 } from "react-bootstrap";
+import {
+    adminConst,
+    customerConst,
+    managerConst,
+    retailPrice,
+    wholesalePrice,
+    workerConst,
+} from "../../Const,js";
 import { createUser } from "../axios/UserApi";
 
 let userRole = "";
@@ -13,14 +21,14 @@ let userPrice = "";
 
 const CreateUserModal = ({ show, onHide }) => {
     const radios = [
-        { name: "Администратор", value: "1", role: "admin" },
-        { name: "Менеджер", value: "2", role: "manager" },
-        { name: "Заказчик", value: "3", role: "customer" },
-        { name: "Производство", value: "4", role: "worker" },
+        { name: "Администратор", value: "1", role: adminConst },
+        { name: "Менеджер", value: "2", role: managerConst },
+        { name: "Заказчик", value: "3", role: customerConst },
+        { name: "Производство", value: "4", role: workerConst },
     ];
     const price = [
-        { name: "Розничный", value: "5", category: "retail" },
-        { name: "Оптовый", value: "6", category: "wholeSale" },
+        { name: "Розничный", value: "5", category: retailPrice },
+        { name: "Оптовый", value: "6", category: wholesalePrice },
     ];
 
     const [email, setEmail] = useState("");
@@ -36,12 +44,19 @@ const CreateUserModal = ({ show, onHide }) => {
         console.log(role);
     }
     function setPriceFN(e, category) {
-        userPrice = category;
+        userPrice = category || retailPrice;
         console.log(userPrice);
         console.log("ok");
     }
 
     async function userDataForm() {
+        if (!userRole) {
+            return alert("Укажите роль");
+        }
+        if (!userPrice && userRole === customerConst) {
+            return alert("Укажите прайс лист");
+        }
+
         const userDataOut = await createUser(
             email,
             password,
@@ -49,13 +64,6 @@ const CreateUserModal = ({ show, onHide }) => {
             userRole,
             userPrice
         );
-
-        if (!userRole) {
-            alert("Укажите роль");
-        }
-        if (!userPrice) {
-            alert("Укажите прайс лист");
-        }
     }
 
     return (
