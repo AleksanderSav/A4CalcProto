@@ -5,10 +5,10 @@ import { TbCalculator } from "react-icons/tb";
 import { FaUserCircle, FaInfoCircle } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 import {
-  ADMIN_PANEL,
-  LOGIN_ROUTE,
-  MAIN_ROUTE,
-  TODO_ROUTE,
+    ADMIN_PANEL,
+    LOGIN_ROUTE,
+    MAIN_ROUTE,
+    TODO_ROUTE,
 } from "../../routeConst/routeConst";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
@@ -17,89 +17,106 @@ import s from "./TopBar.css";
 import { AiOutlineUnorderedList, AiOutlineSetting } from "react-icons/ai";
 
 const TopBar = observer(() => {
-  const { user } = useContext(Context);
-  const userData = [];
-  function logIn() {
-    user.setIsAuth(true);
-    user.setUser();
-  }
+    const { user } = useContext(Context);
 
-  return (
-    <Navbar bg="dark" variant="dark" className="nav">
-      <Container className="">
-        <NavLink
-          to={MAIN_ROUTE}
-          className="text-decoration-none"
-          style={{ color: "white", fontSize: 22 }}
-        >
-          <div>
-            {" "}
-            <TbCalculator size="25" className="me-2 mb-1" style={{}} />
-            TEST CALC
-          </div>
-        </NavLink>
+    function logOut() {
+        user.setUser({});
+        user.setIsAuth(false);
+    }
 
-        <Nav className="">
-          <NavLink to={ADMIN_PANEL}>
-            <Button
-              variant={"warning"}
-              style={{ height: 41 }}
-              className={"me-3"}
-            >
-              <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
-              Панель менеджера
-            </Button>
-          </NavLink>
-          <NavLink to={ADMIN_PANEL}>
-            <Button
-              variant={"warning"}
-              style={{ height: 41 }}
-              className={"me-3"}
-            >
-              <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />
-              Панель администратора
-            </Button>
-          </NavLink>
-          <NavLink to={TODO_ROUTE}>
-            <Button
-              variant={"warning"}
-              style={{ height: 41 }}
-              className={"me-3"}
-            >
-              <AiOutlineUnorderedList
-                style={{ fontSize: 22 }}
-                className="me-2"
-              />
-              Список задач
-            </Button>
-          </NavLink>
-          <NavLink to={LOGIN_ROUTE}>
-            <Button onClick={logIn} variant="warning">
-              <FaUserCircle size="25px" className="me-2" />
-              Авторизация
-            </Button>
-            <Button variant="warning" className="ms-3">
-              <FaInfoCircle size="25px" className="me-2" />
-              Помощь
-            </Button>
-          </NavLink>
-          {/* {user.isAuth ? (*/}
-          {/*  <NavLink to={LOGIN_ROUTE}>*/}
-          {/*    <Button onClick={logIn} variant="warning">*/}
-          {/*      Авторизация*/}
-          {/*    </Button>*/}
-          {/*  </NavLink>*/}
-          {/*) : (*/}
-          {/*  <NavLink to={LOGIN_ROUTE}>*/}
-          {/*    <Button onClick={logIn} variant="warning">*/}
-          {/*      123*/}
-          {/*    </Button>*/}
-          {/*  </NavLink>*/}
-          {/*)} */}
-        </Nav>
-      </Container>
-    </Navbar>
-  );
+    return (
+        <Navbar bg="dark" variant="dark" className="nav">
+            <Container className="">
+                <NavLink
+                    to={MAIN_ROUTE}
+                    className="text-decoration-none"
+                    style={{ color: "white", fontSize: 22 }}
+                >
+                    <div>
+                        {" "}
+                        <TbCalculator
+                            size="25"
+                            className="me-2 mb-1"
+                            style={{}}
+                        />
+                        TEST CALC
+                    </div>
+                </NavLink>
+                <div style={{ color: "white", fontSize: 22 }}>
+                    {user.isAuth ? `Здравствуйте, ${user.user.alias}` : ""}
+                </div>
+                <Nav className="">
+                    {/*<NavLink to={ADMIN_PANEL}>*/}
+                    {/*  <Button*/}
+                    {/*    variant={"warning"}*/}
+                    {/*    style={{ height: 41 }}*/}
+                    {/*    className={"me-3"}*/}
+                    {/*  >*/}
+                    {/*    <AiOutlineSetting style={{ fontSize: 22 }} className="me-2" />*/}
+                    {/*    Панель менеджера*/}
+                    {/*  </Button>*/}
+                    {/*</NavLink>*/}
+                    <NavLink to={ADMIN_PANEL}>
+                        <Button
+                            variant={"warning"}
+                            style={{ height: 41 }}
+                            className={"me-3"}
+                        >
+                            <AiOutlineSetting
+                                style={{ fontSize: 22 }}
+                                className="me-2"
+                            />
+                            Панель администратора
+                        </Button>
+                    </NavLink>
+                    <NavLink to={TODO_ROUTE}>
+                        <Button
+                            variant={"warning"}
+                            style={{ height: 41 }}
+                            className={"me-3"}
+                        >
+                            <AiOutlineUnorderedList
+                                style={{ fontSize: 22 }}
+                                className="me-2"
+                            />
+                            Список задач
+                        </Button>
+                    </NavLink>
+                    {user.isAuth ? (
+                        <Button onClick={logOut} variant="warning">
+                            <FaUserCircle size="25px" className="me-2" />
+                            Выйти
+                        </Button>
+                    ) : (
+                        <NavLink to={LOGIN_ROUTE}>
+                            <Button variant="warning">
+                                <FaUserCircle size="25px" className="me-2" />
+                                Авторизация
+                            </Button>
+                            <Button variant="warning" className="ms-3">
+                                <FaInfoCircle size="25px" className="me-2" />
+                                Помощь
+                            </Button>
+                        </NavLink>
+                    )}
+
+                    {/* {user.isAuth ? (*/}
+                    {/*  <NavLink to={LOGIN_ROUTE}>*/}
+                    {/*    <Button onClick={logIn} variant="warning">*/}
+                    {/*      Авторизация*/}
+                    {/*    </Button>*/}
+                    {/*  </NavLink>*/}
+                    {/*) : (*/}
+                    {/*  <NavLink to={LOGIN_ROUTE}>*/}
+                    {/*    <Button onClick={logIn} variant="warning">*/}
+                    {/*      123*/}
+                    {/*    </Button>*/}
+                    {/*  </NavLink>*/}
+                    {/*)} */}
+                </Nav>
+            </Container>
+        </Navbar>
+    );
 });
 
 export default TopBar;
