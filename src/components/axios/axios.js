@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useContext } from "react";
+import { Context } from "../../index";
 
 const adr = "http://localhost:3002/";
 const intAdr = "http://a4test.na4u.ru/";

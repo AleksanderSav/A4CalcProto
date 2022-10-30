@@ -45,6 +45,7 @@ const CreateUserModal = ({ show, onHide }) => {
     }
     function setPriceFN(e, category) {
         userPrice = category || retailPrice;
+        setPriceList(e);
         console.log(userPrice);
         console.log("ok");
     }
@@ -64,6 +65,7 @@ const CreateUserModal = ({ show, onHide }) => {
             userRole,
             userPrice
         );
+        onHide();
     }
 
     return (
@@ -122,13 +124,14 @@ const CreateUserModal = ({ show, onHide }) => {
                     </div>
                     <div className={"d-flex flex-column"}>
                         Прайс лист
-                        <ButtonGroup className="mb-2">
+                        <ButtonGroup className="mb-2 mt-2">
                             {price.map((radio, idx) => (
                                 <ToggleButton
+                                    style={{ color: "black" }}
                                     key={idx}
                                     id={`price-${idx}`}
                                     type="radio"
-                                    variant="secondary"
+                                    variant="outline-warning"
                                     name="price"
                                     value={radio.value}
                                     disabled={
@@ -153,10 +156,10 @@ const CreateUserModal = ({ show, onHide }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onHide}>
-                    Close
+                    Закрыть
                 </Button>
-                <Button variant="primary" onClick={userDataForm}>
-                    Save Changes
+                <Button variant="success" onClick={userDataForm}>
+                    Сохранить
                 </Button>
             </Modal.Footer>
         </Modal>

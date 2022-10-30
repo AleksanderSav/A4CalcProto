@@ -25,7 +25,7 @@ const ToDoModal = ({ show, hide }) => {
     useEffect(() => {
         getEmployees().then((data) => user.setEmployees(data));
         console.log(user);
-    });
+    }, []);
 
     function selectEmp(i) {
         user.setSelectedEmployees(i);

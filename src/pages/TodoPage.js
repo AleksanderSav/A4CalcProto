@@ -42,19 +42,19 @@ const TodoPage = observer(() => {
     //     }, 60000);
     // }, []);
     ////////////////////////////////////////////////////////////////////////////////////////////
-    useEffect(() => {
-        setInterval(() => {
-            if (user.user.role === "admin") {
-                const res = getToDo()
-                    .then((data) => toDoStore.setToDoList(data))
-                    .finally(() => setLoading(false));
-            } else {
-                const res = getTodoByOwner()
-                    .then((data) => toDoStore.setToDoList(data))
-                    .finally(() => setLoading(false));
-            }
-        }, 60000);
-    }, []);
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         if (user.user.role === "admin") {
+    //             const res = getToDo()
+    //                 .then((data) => toDoStore.setToDoList(data))
+    //                 .finally(() => setLoading(false));
+    //         } else {
+    //             const res = getTodoByOwner()
+    //                 .then((data) => toDoStore.setToDoList(data))
+    //                 .finally(() => setLoading(false));
+    //         }
+    //     }, 60000);
+    // }, []);
 
     return (
         <div>

@@ -57,32 +57,41 @@ const TopBar = observer(() => {
                     {/*    Панель менеджера*/}
                     {/*  </Button>*/}
                     {/*</NavLink>*/}
-                    <NavLink to={ADMIN_PANEL}>
-                        <Button
-                            variant={"warning"}
-                            style={{ height: 41 }}
-                            className={"me-3"}
-                        >
-                            <AiOutlineSetting
-                                style={{ fontSize: 22 }}
-                                className="me-2"
-                            />
-                            Панель администратора
-                        </Button>
-                    </NavLink>
-                    <NavLink to={TODO_ROUTE}>
-                        <Button
-                            variant={"warning"}
-                            style={{ height: 41 }}
-                            className={"me-3"}
-                        >
-                            <AiOutlineUnorderedList
-                                style={{ fontSize: 22 }}
-                                className="me-2"
-                            />
-                            Список задач
-                        </Button>
-                    </NavLink>
+                    {user.user.role === "admin" ? (
+                        <NavLink to={ADMIN_PANEL}>
+                            <Button
+                                variant={"warning"}
+                                style={{ height: 41 }}
+                                className={"me-3"}
+                            >
+                                <AiOutlineSetting
+                                    style={{ fontSize: 22 }}
+                                    className="me-2"
+                                />
+                                Панель администратора
+                            </Button>
+                        </NavLink>
+                    ) : (
+                        ""
+                    )}
+                    {user.isAuth ? (
+                        <NavLink to={TODO_ROUTE}>
+                            <Button
+                                variant={"warning"}
+                                style={{ height: 41 }}
+                                className={"me-3"}
+                            >
+                                <AiOutlineUnorderedList
+                                    style={{ fontSize: 22 }}
+                                    className="me-2"
+                                />
+                                Список задач
+                            </Button>
+                        </NavLink>
+                    ) : (
+                        ""
+                    )}
+
                     {user.isAuth ? (
                         <Button onClick={logOut} variant="warning">
                             <FaUserCircle size="25px" className="me-2" />
