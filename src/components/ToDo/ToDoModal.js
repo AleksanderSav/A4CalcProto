@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     Button,
+    Dropdown,
     FormControl,
     Modal,
     Spinner,
@@ -8,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { getToDo, getTodoByOwner, postToDo } from "../axios/ToDoApi";
 import { Context } from "../../index";
+import { getEmployees } from "../axios/UserApi";
 
 const ToDoModal = ({ show, hide }) => {
     const [message, setMessage] = useState("");
@@ -16,7 +18,19 @@ const ToDoModal = ({ show, hide }) => {
     const [loadingRed, setLoadingRed] = useState(false);
     const [priority, setPriority] = useState(false);
 
+    const [employee, setEmployee] = useState("");
+
     const { user } = useContext(Context);
+
+    useEffect(() => {
+        getEmployees().then((data) => user.setEmployees(data));
+        console.log(user);
+    });
+
+    function selectEmp(i) {
+        user.setSelectedEmployees(i);
+        console.log(user.selectedEmployees.alias);
+    }
 
     async function sendTask() {
         if (user.user.role === "admin") {
@@ -92,6 +106,27 @@ const ToDoModal = ({ show, hide }) => {
                     >
                         Срочная задача
                     </ToggleButton>
+                    <Dropdown style={{ color: "black" }}>
+                        <Dropdown.Toggle
+                            variant="outline-warning"
+                            id="dropdown-basic"
+                            style={{ color: "black" }}
+                        >
+                            {user.selectedEmployees.alias ||
+                                "Выберите сотрудника"}
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            {user.employees.map((i) => (
+                                <Dropdown.Item
+                                    key={i.alias}
+                                    onClick={() => selectEmp(i)}
+                                >
+                                    {i.alias}
+                                </Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Modal.Body>
                 <Modal.Footer>
                     {loading ? (

@@ -25,3 +25,8 @@ export const createUser = async function (
     });
     console.log(data);
 };
+
+export const getEmployees = async function () {
+    const { data } = await host.get("api/user/getall");
+    return data;
+};
