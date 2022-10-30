@@ -22,6 +22,7 @@ const TopBar = observer(() => {
     function logOut() {
         user.setUser({});
         user.setIsAuth(false);
+        localStorage.setItem("token", "");
     }
 
     return (

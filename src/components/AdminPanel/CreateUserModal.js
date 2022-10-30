@@ -13,7 +13,7 @@ import {
     retailPrice,
     wholesalePrice,
     workerConst,
-} from "../../Const,js";
+} from "../../Const";
 import { createUser } from "../axios/UserApi";
 
 let userRole = "";
