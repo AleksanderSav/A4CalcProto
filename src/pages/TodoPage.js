@@ -22,6 +22,8 @@ const TodoPage = observer(() => {
     //         .then((data) => toDoStore.setToDoList(data))
     //         .finally(() => setLoading(false));
     // }, []);
+
+    ////////////////////////////////////////////////////////////////////////
     useEffect(() => {
         if (user.user.role === "admin") {
             const res = getToDo()
@@ -39,6 +41,20 @@ const TodoPage = observer(() => {
     //         const res = getToDo().then((data) => toDoStore.setToDoList(data));
     //     }, 60000);
     // }, []);
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    useEffect(() => {
+        setInterval(() => {
+            if (user.user.role === "admin") {
+                const res = getToDo()
+                    .then((data) => toDoStore.setToDoList(data))
+                    .finally(() => setLoading(false));
+            } else {
+                const res = getTodoByOwner()
+                    .then((data) => toDoStore.setToDoList(data))
+                    .finally(() => setLoading(false));
+            }
+        }, 60000);
+    }, []);
 
     return (
         <div>

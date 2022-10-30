@@ -6,7 +6,7 @@ import {
     Spinner,
     ToggleButton,
 } from "react-bootstrap";
-import { getToDo, postToDo } from "../axios/ToDoApi";
+import { getToDo, getTodoByOwner, postToDo } from "../axios/ToDoApi";
 import { Context } from "../../index";
 
 const ToDoModal = ({ show, hide }) => {
@@ -16,19 +16,42 @@ const ToDoModal = ({ show, hide }) => {
     const [loadingRed, setLoadingRed] = useState(false);
     const [priority, setPriority] = useState(false);
 
+    const { user } = useContext(Context);
+
     async function sendTask() {
-        setLoading(true);
-        const randomNumber = (Math.random() * 10000).toFixed();
-        const createdDate = new Date().toLocaleString();
-        await postToDo(message, randomNumber, priority, createdDate).finally(
-            () => setLoading(false)
-        );
-        setLoadingRed(true);
-        await getToDo()
-            .then((data) => toDoStore.setToDoList(data))
-            .finally(() => setLoadingRed(false));
-        setMessage("");
-        hide();
+        if (user.user.role === "admin") {
+            setLoading(true);
+            const randomNumber = (Math.random() * 10000).toFixed();
+            const createdDate = new Date().toLocaleString();
+            await postToDo(
+                message,
+                randomNumber,
+                priority,
+                createdDate
+            ).finally(() => setLoading(false));
+            setLoadingRed(true);
+            await getToDo()
+                .then((data) => toDoStore.setToDoList(data))
+                .finally(() => setLoadingRed(false));
+            setMessage("");
+            hide();
+        } else {
+            setLoading(true);
+            const randomNumber = (Math.random() * 10000).toFixed();
+            const createdDate = new Date().toLocaleString();
+            await postToDo(
+                message,
+                randomNumber,
+                priority,
+                createdDate
+            ).finally(() => setLoading(false));
+            setLoadingRed(true);
+            await getTodoByOwner()
+                .then((data) => toDoStore.setToDoList(data))
+                .finally(() => setLoadingRed(false));
+            setMessage("");
+            hide();
+        }
     }
 
     // async function sendTask() {
